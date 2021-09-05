@@ -7,4 +7,4 @@ Repositori per al curs de desenvolupament backend. Escola d'oficis.
 
 2. [**Missatgeria instantània via WhatsApp en php**](./whatsapp-notifications/mensajeria.md)
 
-3. [**Firebase amb Angular**](BCN_ACTIVA/bcnactiva/rtdb/realtime.md)
+3. [**Firebase amb Angular**](./rtdb/realtime.md)
