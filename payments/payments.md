@@ -34,9 +34,13 @@ Una pasarela de pago es un servicio de pago digital proporcionado por un tercero
 El tipo de sistema de pago vendrá determinado por los siguientes aspectos:
 
 - **Numero de ventas estimadas**. Este punto determinará la potencia de los servidores y la estructura de base de datos, no es lo mismo el desarrollo para una tienda como Amazon, que para una pequeña tienda de barrio.
+
 - **Ámbito geográfico de los clientes** (local, nacional, global). Este punto determinará las divisas a utilizar, transportes e impuestos.
+
 - **Precio de los productos** en venta y de los pedidos comunes. A la hora de realizar el diseño de la web y la forma de mostrar precios.
+
 - Si la venta es de **productos físicos o servicios** (no requieren envío). Si solo ofrecemos servicios o descargas no deberemos guardar direcciones físicas ni realizar envíos.
+
 - **Criticidad** de los pagos y **concurrencia** de la aceptación del pago con los resultados en nuestra web. Este punto será importante para la implementación de transacciones en nuestra base de datos, si tenemos productos con stock, deberemos controlar en tiempo real su número para no permitir compras con stock cero.
 
 #### Elementos necesarios
@@ -77,6 +81,78 @@ Si no las tenemos, crearemos dos cuentas de pruebas asociadas: Una de comprador 
 ### Integración con Paypal Standard
 
 1. Recuperación de la información de venta e incorporación de un botón de pago dentro de un formulario
+
+```html
+<html>
+<title>Paypal Payment Gateway Integration in PHP</title>
+<head>
+<style>
+body {
+    font-family: Arial;
+    line-height: 30px;
+    color: #333;
+}
+
+#payment-box {
+    padding: 40px;
+    margin: 20px;
+    border: #E4E4E4 1px solid;
+    display: inline-block;
+    text-align: center;
+    border-radius: 3px;
+}
+
+#pay_now {
+    padding: 10px 30px;
+    background: #09f;
+    border: #038fec 1px solid;
+    border-radius: 3px;
+    color: #FFF;
+    width: 100%;
+    cursor: pointer;
+}
+
+.txt-title {
+    margin: 25px 0px 0px 0px;
+    color: #4e4e4e;
+}
+
+.txt-price {
+    margin-bottom: 20px;
+    color: #08926c;
+    font-size: 1.1em;
+}
+</style>
+</head>
+<body>
+    <div id="payment-box">
+        <img src="images/camera.jpg" />
+        <h4 class="txt-title">A6900 MirrorLess Camera</h4>
+        <div class="txt-price">$289.61</div>
+        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+            method="post" target="_top">
+            <input type='hidden' name='business'
+                value='bcncodes.academy@gmail.com'> <input type='hidden'
+                name='item_name' value='Camera'> <input type='hidden'
+                name='item_number' value='CAM#N1'> <input type='hidden'
+                name='amount' value='10'> <input type='hidden'
+                name='no_shipping' value='1'> <input type='hidden'
+                name='currency_code' value='USD'> <input type='hidden'
+                name='notify_url'
+                value='http://www.pruebapaypal.com.mialias.net/notify.php'>
+            <input type='hidden' name='cancel_return'
+                value='http://127.0.0.1/paypal-example/cancel.php'>
+            <input type='hidden' name='return'
+                value='http://127.0.0.1/paypal-example/return.php'>
+            <input type="hidden" name="cmd" value="_xclick"> <input
+                type="submit" name="pay_now" id="pay_now"
+                Value="Pay Now">
+        </form>
+    </div>
+</body>
+</html>
+```
+
 
 2. Envío a paypal de la información necesaria para procesar el pago.
 
